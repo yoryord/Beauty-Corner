@@ -10,11 +10,34 @@
     <!-- Header with Navigation -->
     <header>
         <div class="container">
-            <div class="logo">
-                <h1>Beauty Corner</h1>
-            </div>
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Hair/Brush design -->
+                        <circle cx="50" cy="30" r="18" fill="#d4a574" stroke="#2c2c2c" stroke-width="2"/>
+                        <!-- Scissors style -->
+                        <path d="M 35 50 Q 30 60 25 70" stroke="#d4a574" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        <path d="M 65 50 Q 70 60 75 70" stroke="#d4a574" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        <circle cx="25" cy="72" r="4" fill="#d4a574"/>
+                        <circle cx="75" cy="72" r="4" fill="#d4a574"/>
+                        <!-- Sparkles -->
+                        <circle cx="55" cy="15" r="2" fill="#d4a574"/>
+                        <circle cx="70" cy="25" r="2" fill="#d4a574"/>
+                        <circle cx="70" cy="45" r="2" fill="#d4a574"/>
+                    </svg>
+                    <div class="logo-text">
+                        <h1>Beauty Corner</h1>
+                        <p class="tagline">Your Beauty, Our Passion</p>
+                    </div>
+                </div>
+            </a>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <nav>
-                <ul class="nav-menu">
+                <ul class="nav-menu" id="navMenu">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="about.html">About Us</a></li>
@@ -145,6 +168,24 @@
     </footer>
 
     <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const nav = document.querySelector('nav');
+
+        menuToggle.addEventListener('click', function() {
+            menuToggle.classList.toggle('active');
+            nav.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        document.querySelectorAll('nav .nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                menuToggle.classList.remove('active');
+                nav.classList.remove('active');
+            });
+        });
+
         // Get modal elements
         const modal = document.getElementById('appointmentModal');
         const confirmationModal = document.getElementById('confirmationModal');
