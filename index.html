@@ -32,10 +32,81 @@
             <div class="container">
                 <h2>Welcome to Beauty Corner</h2>
                 <p>Your destination for professional hair care and styling</p>
-                <button class="cta-button">Book an Appointment</button>
+                <button class="cta-button" id="bookBtn">Book an Appointment</button>
             </div>
         </section>
     </main>
+
+    <!-- Appointment Modal -->
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Book an Appointment</h2>
+            <form id="appointmentForm">
+                <div class="form-group">
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="service">Select Service:</label>
+                    <select id="service" name="service" required>
+                        <option value="">-- Choose a service --</option>
+                        <option value="haircut">Haircut</option>
+                        <option value="coloring">Hair Coloring</option>
+                        <option value="styling">Styling</option>
+                        <option value="treatment">Hair Treatment</option>
+                        <option value="extensions">Hair Extensions</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Select Date:</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Select Time:</label>
+                    <select id="time" name="time" required>
+                        <option value="">-- Choose a time --</option>
+                        <option value="09:00">09:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="13:00">01:00 PM</option>
+                        <option value="14:00">02:00 PM</option>
+                        <option value="15:00">03:00 PM</option>
+                        <option value="16:00">04:00 PM</option>
+                        <option value="17:00">05:00 PM</option>
+                        <option value="18:00">06:00 PM</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Additional Notes:</label>
+                    <textarea id="notes" name="notes" rows="4"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Confirm Appointment</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content confirmation-content">
+            <span class="close close-confirmation">&times;</span>
+            <div class="confirmation-message">
+                <h2>✓ Appointment Confirmed</h2>
+                <p class="confirmation-subtitle">Thank you for booking with <strong>Beauty Corner</strong>!</p>
+                <div id="confirmationDetails" class="confirmation-details"></div>
+                <button class="submit-btn close-confirmation-btn">Done</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -72,5 +143,102 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Get modal elements
+        const modal = document.getElementById('appointmentModal');
+        const confirmationModal = document.getElementById('confirmationModal');
+        const bookBtn = document.getElementById('bookBtn');
+        const closeBtn = document.querySelector('.close');
+        const closeConfirmationBtn = document.querySelector('.close-confirmation');
+        const closeConfirmationBtnClick = document.querySelector('.close-confirmation-btn');
+        const appointmentForm = document.getElementById('appointmentForm');
+
+        // Open modal when "Book an Appointment" button is clicked
+        bookBtn.addEventListener('click', function() {
+            modal.style.display = 'block';
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').setAttribute('min', today);
+        });
+
+        // Close modal when X button is clicked
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside the modal content
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+            if (event.target === confirmationModal) {
+                confirmationModal.style.display = 'none';
+            }
+        });
+
+        // Close confirmation modal
+        closeConfirmationBtn.addEventListener('click', function() {
+            confirmationModal.style.display = 'none';
+        });
+
+        closeConfirmationBtnClick.addEventListener('click', function() {
+            confirmationModal.style.display = 'none';
+        });
+
+        // Handle form submission
+        appointmentForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const notes = document.getElementById('notes').value;
+            
+            // Format the confirmation details
+            const confirmationHTML = `
+                <div class="detail-item">
+                    <span class="detail-label">Name:</span>
+                    <span class="detail-value">${name}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Email:</span>
+                    <span class="detail-value">${email}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Phone:</span>
+                    <span class="detail-value">${phone}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Service:</span>
+                    <span class="detail-value">${service}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Date:</span>
+                    <span class="detail-value">${date}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Time:</span>
+                    <span class="detail-value">${time}</span>
+                </div>
+                ${notes ? `<div class="detail-item">
+                    <span class="detail-label">Notes:</span>
+                    <span class="detail-value">${notes}</span>
+                </div>` : ''}
+            `;
+            
+            // Display confirmation in styled modal
+            document.getElementById('confirmationDetails').innerHTML = confirmationHTML;
+            modal.style.display = 'none';
+            confirmationModal.style.display = 'block';
+            
+            // Reset form
+            appointmentForm.reset();
+        });
+    </script>
 </body>
 </html>

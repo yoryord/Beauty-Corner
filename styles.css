@@ -397,3 +397,241 @@ footer {
         padding: 25px 15px;
     }
 }
+
+/* ==================== Modal & Appointment Form ==================== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background-color: var(--white);
+    margin: 5% auto;
+    padding: 40px;
+    border: none;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close {
+    color: var(--secondary-color);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--primary-color);
+}
+
+.modal-content h2 {
+    color: var(--secondary-color);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--secondary-color);
+    font-weight: 600;
+    font-size: 0.95em;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1em;
+    color: var(--text-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(212, 165, 116, 0.3);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.submit-btn {
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 600px) {
+    .modal-content {
+        width: 95%;
+        padding: 30px 20px;
+        margin: 20% auto;
+    }
+
+    .modal-content h2 {
+        font-size: 1.5em;
+    }
+
+    .form-group label {
+        font-size: 0.9em;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 10px;
+        font-size: 0.95em;
+    }
+}
+
+/* ==================== Confirmation Modal ==================== */
+.confirmation-content {
+    text-align: center;
+    padding: 50px 40px;
+}
+
+.confirmation-message h2 {
+    color: var(--primary-color);
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.confirmation-subtitle {
+    color: var(--secondary-color);
+    font-size: 1.05em;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.confirmation-subtitle strong {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.confirmation-details {
+    background-color: var(--light-bg);
+    border-radius: 8px;
+    padding: 25px;
+    margin: 25px 0;
+    text-align: left;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--accent-color);
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: var(--secondary-color);
+    flex: 0 0 35%;
+}
+
+.detail-value {
+    color: var(--primary-color);
+    font-weight: 500;
+    flex: 1;
+    text-align: right;
+}
+
+@media (max-width: 600px) {
+    .confirmation-content {
+        padding: 40px 20px;
+    }
+
+    .confirmation-message h2 {
+        font-size: 1.5em;
+    }
+
+    .confirmation-subtitle {
+        font-size: 0.95em;
+    }
+
+    .confirmation-details {
+        padding: 20px;
+    }
+
+    .detail-item {
+        flex-direction: column;
+        padding: 10px 0;
+    }
+
+    .detail-label {
+        flex: 1;
+        margin-bottom: 5px;
+    }
+
+    .detail-value {
+        text-align: left;
+    }
+}
